@@ -1,0 +1,11 @@
+# Arquivos compilados do Java
+*.class
+# Logs
+*.log
+# Configurações locais do Eclipse
+.metadata/ .settings/ .project .classpath
+# Pastas de compilação
+bin/ build/ target/
+# Arquivos temporários do sistema
+.DS_Store Thumbs.db
+
