@@ -6,23 +6,37 @@ import java.sql.SQLException;
 
 public class Conexao {
 
-    private static final String URL =
-        "jdbc:mysql://localhost:3306/sistema_comandas";
+    private static final String DEFAULT_URL =
+        "jdbc:mysql://localhost:3306/sistema_comandas?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo&useUnicode=true&characterEncoding=UTF-8";
+    private static final String DEFAULT_USER = "root";
+    private static final String DEFAULT_PASS = "senha";
 
-    private static final String USUARIO = "root";
-    private static final String SENHA = "senha";
-
-    public static Connection conectar() throws SQLException {
+    static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            throw new SQLException(
-                "Driver JDBC do MySQL não encontrado. Verifique o Connector/J.",
-                e
-            );
+            System.err.println("Driver JDBC do MySQL não encontrado: " + e.getMessage());
         }
+    }
 
-        return DriverManager.getConnection(URL, USUARIO, SENHA);
+    public static Connection conectar() throws SQLException {
+        String envUrl = System.getenv("DB_URL");
+        String url = (envUrl != null && !envUrl.isBlank()) ? envUrl : System.getProperty("db.url", DEFAULT_URL);
+
+        String envUser = System.getenv("DB_USER");
+        String user = (envUser != null && !envUser.isBlank()) ? envUser : System.getProperty("db.user", DEFAULT_USER);
+
+        String envPass = System.getenv("DB_PASSWORD");
+        String pass = (envPass != null) ? envPass : System.getProperty("db.password", DEFAULT_PASS);
+
+        return DriverManager.getConnection(url, user, pass);
+    }
+
+    public static boolean testarConexao() {
+        try (Connection conn = conectar()) {
+            return conn != null && !conn.isClosed();
+        } catch (SQLException e) {
+            return false;
+        }
     }
 }
-
