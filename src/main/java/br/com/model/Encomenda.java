@@ -13,23 +13,37 @@ public class Encomenda {
     private BigDecimal valorPagto;
     private BigDecimal valorFrete;
     private BigDecimal valorEncomenda;
+    private String status;
+
+    public Encomenda() {}
 
     public Integer getIdEncomenda() { return idEncomenda; }
     public void setIdEncomenda(Integer idEncomenda) { this.idEncomenda = idEncomenda; }
+
     public Integer getIdCliente() { return idCliente; }
     public void setIdCliente(Integer idCliente) { this.idCliente = idCliente; }
+
     public LocalDateTime getDtPedido() { return dtPedido; }
     public void setDtPedido(LocalDateTime dtPedido) { this.dtPedido = dtPedido; }
+
     public LocalDateTime getDtEntrega() { return dtEntrega; }
     public void setDtEntrega(LocalDateTime dtEntrega) { this.dtEntrega = dtEntrega; }
+
     public String getFormaEntrega() { return formaEntrega; }
     public void setFormaEntrega(String formaEntrega) { this.formaEntrega = formaEntrega; }
+
     public String getFormaPagto() { return formaPagto; }
     public void setFormaPagto(String formaPagto) { this.formaPagto = formaPagto; }
+
     public BigDecimal getValorPagto() { return valorPagto; }
     public void setValorPagto(BigDecimal valorPagto) { this.valorPagto = valorPagto; }
+
     public BigDecimal getValorFrete() { return valorFrete; }
     public void setValorFrete(BigDecimal valorFrete) { this.valorFrete = valorFrete; }
+
     public BigDecimal getValorEncomenda() { return valorEncomenda; }
     public void setValorEncomenda(BigDecimal valorEncomenda) { this.valorEncomenda = valorEncomenda; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
