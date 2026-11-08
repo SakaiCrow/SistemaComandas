@@ -32,6 +32,11 @@ public class EstoqueDAO {
         return idEstoque;
     }
 
+    public int excluir(int idEstoque) throws SQLException {
+        DbHelper.executeUpdate("DELETE FROM precoItemEstoque WHERE idEstoque = ?", idEstoque);
+        return DbHelper.executeUpdate("DELETE FROM estoque WHERE idEstoque = ?", idEstoque);
+    }
+
     public List<Map<String, Object>> listarEstoqueBaixo() throws SQLException {
         String sql = "SELECT p.idProduto, p.nome AS produto, COALESCE(SUM(e.quantidade), 0) AS quantidadeEstoque "
                    + "FROM produtos p "

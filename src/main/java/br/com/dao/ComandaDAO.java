@@ -41,6 +41,11 @@ public class ComandaDAO {
         return DbHelper.executeUpdate(sql, valorPago, metodoPagamento, idComanda);
     }
 
+    public int excluir(int idComanda) throws SQLException {
+        String sql = "DELETE FROM comanda WHERE idComanda = ?";
+        return DbHelper.executeUpdate(sql, idComanda);
+    }
+
     public long contarAbertas() throws SQLException {
         Object val = DbHelper.scalar("SELECT COUNT(*) FROM comanda WHERE status = 'Aberta'");
         return (val instanceof Number) ? ((Number) val).longValue() : 0L;
